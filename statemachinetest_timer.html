@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="statemachine.js"></script>
+    <script src="statemachinetest_timer.js"></script>
+	<style>
+		.box
+		{
+			cursor: pointer; 
+			width: 100px; 
+			height: 100px; 
+			position: absolute;
+		}
+		
+		#north 
+		{
+			left: 100px;
+			top: 0px;
+			background-color: red;
+		}
+		
+		#west
+		{
+			left:0px;
+			top:100px;
+			background-color: green;
+		}
+		
+		#east
+		{
+			left: 200px;
+			top: 100px;
+			background-color: green;
+		}
+		
+		#south
+		{
+			left:100px;
+			top: 200px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="light_container">
+    	<div id="north" class="box"></div>
+		<div id="west" class="box"></div>
+		<div id="east" class="box"></div>
+		<div id="south" class="box"></div>
+	</div>
+</body>
+</html>

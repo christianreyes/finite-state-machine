@@ -79,5 +79,5 @@ window.onload = function() {
    
 
 	var stateMachineRed = new StateMachine(sampleDescription, myRedDiv);
-	var stateMachineGreen = new StateMachineTable(sampleDescription, myGreenDiv);
+	var stateMachineGreen = new StateMachine(sampleDescription, myGreenDiv);
 };
