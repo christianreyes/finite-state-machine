@@ -98,8 +98,9 @@ StateMachine.prototype.standardEventLookup = {
 	mouseMove: "mousemove",
 	mouseIn: "mouseover",
 	mouseOut: "mouseout",
-	keyPress: "keypressdown",
-	doubleClick: "dblclick"
+	keyPress: "keypress",
+	doubleClick: "dblclick",
+	onBlur: "blur"
 };
 
 StateMachine.prototype.standardEvent = function(transitionInput){

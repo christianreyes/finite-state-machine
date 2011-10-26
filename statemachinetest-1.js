@@ -6,8 +6,13 @@ function record_down_location(e, attachedElement) {
     console.log("record down location: " + e.clientX + ", " + e.clientY);
     attachedElement.downX = e.clientX;
     attachedElement.downY = e.clientY;
-    attachedElement.origLeft = parseInt(attachedElement.style.left) || 0;
-    attachedElement.origTop = parseInt(attachedElement.style.top) || 0;
+
+	position = $(attachedElement).position();
+    attachedElement.origLeft = position.left;
+    attachedElement.origTop = position.top;
+	$(attachedElement).toggleClass("hover_border");
+	$(attachedElement).toggleClass("dragging");
+	
     attachedElement.style.backgroundColor = "blue";
 	attachedElement.style.zIndex = 100;
 }

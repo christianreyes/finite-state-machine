@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-1.6.4.min.js"></script>
+	<script src="statemachine.js"></script>
+    <script src="statemachinetest-3.js"></script>
+	<style>
+		body
+		{
+			background: black url('background.png') no-repeat scroll left top;
+			font-family: Sans-Serif;
+		}
+		
+		body input[type="text"]
+		{
+			font-size: 14px;
+		}
+		
+		.folder_icon
+		{
+			background-image: url('HYDROPRO/Folder.png');
+			right: 50px;
+			top: 50px;
+		}
+		
+		.icon
+		{
+			background-repeat: no-repeat;
+			background-size: 100%;
+			width: 120px;
+			height: 140px;
+			position: absolute;
+			cursor: pointer;
+		}
+		
+		.hover_border:hover
+		{
+			border: 5px solid rgba(51, 51, 51, .3);
+			border-radius: 5px;
+			margin: -5px;
+		}
+				
+		#title_container
+		{
+			position: absolute;
+			bottom: 0;
+			color: #00e2f6;
+			text-align: center;
+			width: 100%;
+		}
+		
+		.hidden_textbox
+		{
+			display: none;
+		}
+		
+		.visible_textbox > input[type="text"]
+		{
+			text-align: center;
+			width: 100%;
+			color: #00e2f6;
+			background: transparent;
+			border: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="icon1" class="folder_icon icon hover_border">
+		<div id="title_container">
+			<span id="title">Project 3</span>
+			<form id="form_textbox" class="hidden_textbox">
+				<input id="textbox" type="text"></input>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
