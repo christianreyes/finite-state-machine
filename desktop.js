@@ -28,9 +28,14 @@ function move_out(e, attachedElement) {
 }
 
 // Moves the icon when the mouse moves.
-function move_icon(e, attachedElement) {
+function move_item(e, attachedElement) {
     attachedElement.style.left = (attachedElement.origLeft + (e.clientX - attachedElement.downX)) + "px";
     attachedElement.style.top = (attachedElement.origTop + (e.clientY - attachedElement.downY)) + "px";
+}
+
+// 
+function open_folder(e, attachedElement) {
+	alert("DOUBLE CLICK!");
 }
 
 
@@ -38,7 +43,7 @@ function move_icon(e, attachedElement) {
 window.onload = function() {
     var folder = document.getElementById("folder");
 	
-	var drag = {
+	var drag_definition = {
 		states: [
 		{
 			name: "start",
@@ -59,7 +64,7 @@ window.onload = function() {
 				},
 				{
 					input: "mouseMove",
-					action: move_icon,
+					action: move_item,
 					endState: "down"
 				},
 				{
@@ -71,8 +76,21 @@ window.onload = function() {
 		}
 		]
 	};
-
+	
+	var open_folder_definition = {
+		states: [
+		{
+			name: "start",
+			transitions: [
+				{
+					input: "doubleClick", 
+					action: open_folder,
+					endState: "start"
+				}]
+		}
+		]
+	};
    
-
-	var smIcon = new StateMachine(drag, folder);
+	var smIcon = new StateMachine(drag_definition, folder);
+	//var smDoubleClick = new StateMachine(open_folder_definition, folder);
 };
