@@ -54,10 +54,17 @@ StateMachine.prototype.descriptionToTable = function(description){
 		for(var t in state.transitions){
 			var transition = state.transitions[t];
 			
-			table[state.name][this.standardEventLookup[transition.input]] = {
-				action: transition.action,
-				endState: transition.endState
-			};						
+			if(this.standardEvent(transition.input)){
+				table[state.name][this.standardEventLookup[transition.input]] = {
+					action: transition.action,
+					endState: transition.endState
+				};
+			} else {
+				table[state.name][transition.input] = {
+					action: transition.action,
+					endState: transition.endState
+				};
+			}						
 		}
 			
 	}
@@ -74,7 +81,7 @@ StateMachine.prototype.addStateMachineEventListener = function(transitionInput, 
 		
 		if(! timer_created.value){
 			sm = this;
-			setInterval( function(){ sm.updateState(transitionInput.toLowerCase()); }, ms );
+			setInterval( function(){ sm.updateState(transitionInput); }, ms );
 			timer_created.value = true;
 		}
 	}

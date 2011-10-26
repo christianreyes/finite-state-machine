@@ -40,6 +40,45 @@ var _folder_icon_definition = {
 	]
 };
 
+var _draw_icon_definition = {
+	states: [
+	{
+		name: "start",
+		transitions: [
+			{
+				input: "mouseDown", 
+				action: record_down_location,
+				endState: "down"
+			},
+			{
+				input: "doubleClick", 
+				action: open_canvas,
+				endState: "start"
+			}]
+	},
+	{
+		name: "down",
+		transitions: [
+			{
+				input: "mouseUp",
+				action: do_drop,
+				endState: "start"
+			},
+			{
+				input: "mouseMove",
+				action: move_item,
+				endState: "down"
+			},
+			{
+				input: "mouseOut",
+				action: move_out,
+				endState: "start"
+			}
+		]
+	}
+	]
+};
+
 var _folder_definition = {
 	states: [
 	{
@@ -138,6 +177,17 @@ function open_folder(e, attachedElement) {
 	var folder = document.createElement("div");
 	folder.id = "folder";
 	$(folder).addClass("folder");
+	
+	$('body').append(folder);
+	new StateMachine(_folder_definition, folder);
+}
+
+function open_canvas(e, attachedElement) {
+	log("open_canvas");
+	
+	var folder = document.createElement("canvas");
+	folder.id = "canvas";
+	$(folder).addClass("canvas");
 	$(folder).addClass("hover_border");
 	
 	$('body').append(folder);
@@ -154,7 +204,10 @@ function log(message){
 // Provides the state machine description and creates a new state machine attached to myDiv
 window.onload = function() {
 	var folder_icon = document.getElementById("icon1");
+	var draw_icon = document.getElementById("icon2");
    
 	//var smDoubleClick = new StateMachine(open_folder_definition, folder);
-	var smIcon = new StateMachine(_folder_icon_definition, folder_icon);
+	new StateMachine(_folder_icon_definition, folder_icon);
+	new StateMachine(_draw_icon_definition, draw_icon);
+	
 };
