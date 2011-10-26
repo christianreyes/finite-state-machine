@@ -23,7 +23,7 @@ function StateMachine(description, elementToAttach){
 }
 
 StateMachine.prototype.updateState = function(e){		
-	log("update state: " + e.type);		
+	//console.log("update state: " + e.type);		
 	// retrieve the transition for the current state with the input event that just occurred
 	var transition;
 	
