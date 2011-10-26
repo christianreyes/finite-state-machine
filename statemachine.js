@@ -7,6 +7,7 @@
 function StateMachine(description, elementToAttach){
 	this.current_state = description.states[0].name;		// first state in the list
 	this.stateTable = this.descriptionToTable(description);	// convert the definition to table format
+	this.inputs = {};
 	this.element = elementToAttach;
 	this.element.stateMachine = this;
 
@@ -73,16 +74,19 @@ StateMachine.prototype.descriptionToTable = function(description){
 };
 
 StateMachine.prototype.addStateMachineEventListener = function(transitionInput, timer_created){	
-	if( this.standardEvent(transitionInput) ) {
-		this.element.addEventListener(this.standardEventLookup[transitionInput], function(e){ this.stateMachine.updateState(e); }, true);
-	} else {
-		var matchData = transitionInput.match(/timerTick(\d+)Ms/);
-		var ms = matchData[1];
+	if( typeof(this.inputs[transitionInput]) == "undefined" ){
+		this.inputs[transitionInput] = transitionInput;
+		if( this.standardEvent(transitionInput) ) {
+			this.element.addEventListener(this.standardEventLookup[transitionInput], function(e){ this.stateMachine.updateState(e); }, true);
+		} else {
+			var matchData = transitionInput.match(/timerTick(\d+)Ms/);
+			var ms = matchData[1];
 		
-		if(! timer_created.value){
-			sm = this;
-			setInterval( function(){ sm.updateState(transitionInput); }, ms );
-			timer_created.value = true;
+			if(! timer_created.value){
+				sm = this;
+				setInterval( function(){ sm.updateState(transitionInput); }, ms );
+				timer_created.value = true;
+			}
 		}
 	}
 };
