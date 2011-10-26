@@ -49,11 +49,22 @@ var _folder_definition = {
 				input: "mouseDown", 
 				action: record_down_location,
 				endState: "down"
+			},
+			{
+				input: "mouseIn",
+				action: highlight,
+				endState: "start"
+			},
+			{
+				input: "mouseUp",
+				action: prompt,
+				endState: "start"
 			}]
 	},
 	{
 		name: "down",
 		transitions: [
+			
 			{
 				input: "mouseUp",
 				action: do_drop,
@@ -100,6 +111,14 @@ function do_drop(e, attachedElement) {
     letGo(attachedElement);
 }
 
+function highlight(e, attachedElement) {
+	log(e);
+}
+
+function prompt(e,attachedElement){
+	log("just draggeed into");
+}
+
 // When mouse moves outside of region, log this.
 function move_out(e, attachedElement) {
 	log("move_out");
@@ -108,8 +127,7 @@ function move_out(e, attachedElement) {
 
 // Moves the icon when the mouse moves.
 function move_item(e, attachedElement) {
-	log((attachedElement.origLeft + (e.clientX - attachedElement.downX)) + "px " + (attachedElement.origTop + (e.clientY - attachedElement.downY)) + "px");
-    attachedElement.style.left = (attachedElement.origLeft + (e.clientX - attachedElement.downX)) + "px";
+	attachedElement.style.left = (attachedElement.origLeft + (e.clientX - attachedElement.downX)) + "px";
     attachedElement.style.top = (attachedElement.origTop + (e.clientY - attachedElement.downY)) + "px";
 }
 
@@ -120,13 +138,14 @@ function open_folder(e, attachedElement) {
 	var folder = document.createElement("div");
 	folder.id = "folder";
 	$(folder).addClass("folder");
+	$(folder).addClass("hover_border");
 	
 	$('body').append(folder);
 	new StateMachine(_folder_definition, folder);
 }
 
 function log(message){
-	var logging = false;
+	var logging = true;
 	if(logging){
 		console.log(message);
 	}

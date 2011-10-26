@@ -23,7 +23,7 @@ function StateMachine(description, elementToAttach){
 }
 
 StateMachine.prototype.updateState = function(e){		
-	//console.log("update state: " + e.type);		
+	console.log("update state: " + e.type);		
 	// retrieve the transition for the current state with the input event that just occurred
 	var transition;
 	
@@ -67,7 +67,7 @@ StateMachine.prototype.descriptionToTable = function(description){
 
 StateMachine.prototype.addStateMachineEventListener = function(transitionInput, timer_created){	
 	if( this.standardEvent(transitionInput) ) {
-		this.element.addEventListener(this.standardEventLookup[transitionInput], function(e){ this.stateMachine.updateState(e); }, false);
+		this.element.addEventListener(this.standardEventLookup[transitionInput], function(e){ this.stateMachine.updateState(e); }, true);
 	} else {
 		var matchData = transitionInput.match(/timerTick(\d+)Ms/);
 		var ms = matchData[1];
@@ -85,7 +85,7 @@ StateMachine.prototype.standardEventLookup = {
 	mouseUp: "mouseup",
 	click: "click",
 	mouseMove: "mousemove",
-	mouseIn: "mousein",
+	mouseIn: "mouseover",
 	mouseOut: "mouseout",
 	keyPress: "keypressdown",
 	doubleClick: "dblclick"
