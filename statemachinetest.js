@@ -9,11 +9,13 @@ function record_down_location(e, attachedElement) {
     attachedElement.origLeft = parseInt(attachedElement.style.left) || 0;
     attachedElement.origTop = parseInt(attachedElement.style.top) || 0;
     attachedElement.style.backgroundColor = "blue";
+	attachedElement.style.zIndex = 100;
 }
 
 // When the div is released, make its background color red again.
 function letGo(attachedElement) {
     attachedElement.style.backgroundColor = "red";
+	attachedElement.style.zIndex = 0;
 }
 
 // Log that the div was dropped and change color

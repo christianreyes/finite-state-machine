@@ -22,7 +22,8 @@ function StateMachine(description, elementToAttach){
 	}
 }
 
-StateMachine.prototype.updateState = function(e){				
+StateMachine.prototype.updateState = function(e){		
+	log("update state: " + e.type);		
 	// retrieve the transition for the current state with the input event that just occurred
 	var transition;
 	
@@ -53,7 +54,7 @@ StateMachine.prototype.descriptionToTable = function(description){
 		for(var t in state.transitions){
 			var transition = state.transitions[t];
 			
-			table[state.name][transition.input.toLowerCase()] = {
+			table[state.name][this.standardEventLookup[transition.input]] = {
 				action: transition.action,
 				endState: transition.endState
 			};						
