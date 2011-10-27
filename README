@@ -61,6 +61,8 @@ For instance, if the user clicks the mouse, 50% of the time action A will be exe
 					Test File Descriptions
 ===============================================================
 
+I only used jquery to select items easier and manipulate their properties.
+
 desktop.html
 
 Integration of multiple state machines at the same time. Modeling different 
