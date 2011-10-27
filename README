@@ -64,7 +64,13 @@ For instance, if the user clicks the mouse, 50% of the time action A will be exe
 desktop.html
 
 Integration of multiple state machines at the same time. Modeling different 
-interactions. 
+interactions all at the same time. The code is REALLY messy. Sorry about that.
+I had to focus on the core and the tests and had to merge it all for the desktop.
+
+Double click on "Project 3". Try to rename it also
+Double click "Draw!". Click inside it to draw
+There is a simulated CPU usage monitor to the left
+Drag the icons and folder
 
 Most of the statemachinetest files were made to test out an interaction method without
 risking having interacting bugs. They are stand-alone instances of the interactions.
