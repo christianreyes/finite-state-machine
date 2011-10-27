@@ -8,6 +8,7 @@
 		body
 		{
 			background: black url('background.png') no-repeat scroll left top;
+			font-family: Sans-Serif;
 		}
 		
 		#activity
@@ -20,10 +21,41 @@
 			border: 1px solid black;
 			background-color: rgba(000,223,245,.4);
 		}
+		
+		div > span
+		{
+			width: 100%;
+			text-align: center;
+			position: absolute;
+			top: 10px;
+		}
+		
+		#graph_container 
+		{
+			height: 155px;
+			width: 30px;
+			margin-top: 35px;
+			margin-left:9px;
+			border: 1px solid black;
+		}
+		
+		#graph
+		{
+			background-color: #00f37a;
+			position: absolute;
+			bottom: 9px;
+			width: 30px;
+			height: 0px;
+		}
 	</style>
 </head>
 <body>
 	<div id="activity">
+		<span id="percent">0%</span>
+		<div id="graph_container">
+			<div id="graph">
+			</div>
+		</div>
 	</div>
 </body>
 </html>

@@ -15,6 +15,22 @@ function poll_activity_high(e, attachedElement){
 
 function poll_activity(e, attachedElement, level){
 	log("poll activity: " + level);
+	
+	var activity_level;
+	switch(level){
+		case "low":
+			activity_level = Math.random() * .3
+			break;
+		case "medium":
+			activity_level = .3 + Math.random() * .6
+			break;
+		case "high":
+			activity_level = .9 + Math.random() * .1
+			break;
+	}
+	
+	$("#graph").css("height", Math.floor(activity_level * 155) + "px"); 
+	$("#percent").text(Math.floor(activity_level * 100) + "%");
 }
 
 function log(message){

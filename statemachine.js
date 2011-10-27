@@ -24,21 +24,47 @@ function StateMachine(description, elementToAttach){
 }
 
 StateMachine.prototype.updateState = function(e){		
-	console.log("update state: " + e.type);		
+	log("update state: " + e);		
 	// retrieve the transition for the current state with the input event that just occurred
-	var transition;
-	
+	var transitions;
+	var inputLookup;
+
 	if( typeof(e) == "object") {
-		transition = this.stateTable[this.current_state][e.type]; 
+		inputLookup = e.type;
 	} else {
-		transition = this.stateTable[this.current_state][e]; 
+		inputLookup = e;
 	}
+	
+	transitions = this.stateTable[this.current_state][inputLookup];
 	
 	// execute the transition action and change the current state if there is a transition 
 	// for the current state based on the the input event
-	if(typeof(transition) != "undefined"){
-		transition.action(e, this.element);
-		this.current_state = transition.endState;
+	
+	var tlength = transitions.length;
+	if(tlength == 1){
+		var transition = transitions[0];
+		if(typeof(transition) != "undefined"){
+			transition.action(e, this.element);
+			this.current_state = transition.endState;
+		}
+		
+	} else {
+		
+		var probNum = Math.random();
+		var totalProb = 0;
+		for(var i = 0; i < tlength; i++){
+			var transition = transitions[i];
+
+			if(typeof(transition.probability) != "undefined"){
+				totalProb += transition.probability;
+				if(probNum <= totalProb){
+					transition.action(e, this.element);
+					this.current_state = transition.endState;
+					break;
+				} 
+			}
+		}
+		
 	}
 };
 
@@ -54,17 +80,24 @@ StateMachine.prototype.descriptionToTable = function(description){
 	
 		for(var t in state.transitions){
 			var transition = state.transitions[t];
+			var input_name;
 			
 			if(this.standardEvent(transition.input)){
-				table[state.name][this.standardEventLookup[transition.input]] = {
-					action: transition.action,
-					endState: transition.endState
-				};
+				input_name = this.standardEventLookup[transition.input];
 			} else {
-				table[state.name][transition.input] = {
-					action: transition.action,
-					endState: transition.endState
-				};
+				input_name = transition.input;
+			}
+			
+			var newTransition = {
+				action: transition.action,
+				endState: transition.endState,
+				probability: transition.probability
+			};
+				
+			if( typeof(table[state.name][input_name]) == "undefined"){
+				table[state.name][input_name] = [newTransition];
+			} else {
+				table[state.name][input_name].push(newTransition);
 			}						
 		}
 			
