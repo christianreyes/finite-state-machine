@@ -40,31 +40,34 @@ StateMachine.prototype.updateState = function(e){
 	// execute the transition action and change the current state if there is a transition 
 	// for the current state based on the the input event
 	
-	var tlength = transitions.length;
-	if(tlength == 1){
-		var transition = transitions[0];
-		if(typeof(transition) != "undefined"){
-			transition.action(e, this.element);
-			this.current_state = transition.endState;
-		}
-		
-	} else {
-		
-		var probNum = Math.random();
-		var totalProb = 0;
-		for(var i = 0; i < tlength; i++){
-			var transition = transitions[i];
-
-			if(typeof(transition.probability) != "undefined"){
-				totalProb += transition.probability;
-				if(probNum <= totalProb){
-					transition.action(e, this.element);
-					this.current_state = transition.endState;
-					break;
-				} 
+	if(typeof(transitions) != "undefined"){
+	
+		var tlength = transitions.length;
+		if(tlength == 1){
+			var transition = transitions[0];
+			if(typeof(transition) != "undefined"){
+				transition.action(e, this.element);
+				this.current_state = transition.endState;
 			}
-		}
 		
+		} else {
+		
+			var probNum = Math.random();
+			var totalProb = 0;
+			for(var i = 0; i < tlength; i++){
+				var transition = transitions[i];
+
+				if(typeof(transition.probability) != "undefined"){
+					totalProb += transition.probability;
+					if(probNum <= totalProb){
+						transition.action(e, this.element);
+						this.current_state = transition.endState;
+						break;
+					} 
+				}
+			}
+		
+		}
 	}
 };
 

@@ -90,15 +90,11 @@ var _folder_definition = {
 				endState: "down"
 			},
 			{
-				input: "mouseIn",
-				action: highlight,
+				input: "doubleClick", 
+				action: hide_folder,
 				endState: "start"
-			},
-			{
-				input: "mouseUp",
-				action: prompt,
-				endState: "start"
-			}]
+			}
+			]
 	},
 	{
 		name: "down",
@@ -150,8 +146,11 @@ function do_drop(e, attachedElement) {
     letGo(attachedElement);
 }
 
-function highlight(e, attachedElement) {
-	log(e);
+function copy_folder(e, attachedElement) {
+	log("copying " + e.relatedTarget);
+	if(!$(e.relatedTarget).is("html")){
+		$(e.relatedTarget).remove();
+	}
 }
 
 function prompt(e,attachedElement){
@@ -170,16 +169,23 @@ function move_item(e, attachedElement) {
     attachedElement.style.top = (attachedElement.origTop + (e.clientY - attachedElement.downY)) + "px";
 }
 
+function hide_folder(e, attachedElement){
+	$('#folder').css("display", "none");
+	
+}
+
 // 
 function open_folder(e, attachedElement) {
 	log("open_folder");
 	
-	var folder = document.createElement("div");
-	folder.id = "folder";
-	$(folder).addClass("folder");
+	var folder = document.getElementById("folder");
 	
-	$('body').append(folder);
-	new StateMachine(_folder_definition, folder);
+	$("#folder_title").text($("#icon1 > span").text());
+	$('#folder').css("display", "inline-block");
+	
+	if(typeof($('#folder').stateMachine) == "undefined"){
+		new StateMachine(_folder_definition, folder);
+	}
 }
 
 function open_canvas(e, attachedElement) {

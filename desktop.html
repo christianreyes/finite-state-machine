@@ -9,6 +9,7 @@
 		{
 			background: black url('background.png') no-repeat scroll left top;
 			font-family: Sans-Serif;
+			color: #00e2f6;
 		}
 		
 		.folder_icon
@@ -37,6 +38,27 @@
 		
 		.folder
 		{
+			display: none;
+			position: absolute;
+			left: 100px;
+			top: 100px;
+			width: 569px;
+			height: 394px;
+			background-color: rgba(000,223,245,.1);
+			border-radius: 3px;
+		}
+		
+		.folder > span
+		{
+			padding: 10px;
+			border-bottom: 2px solid rgba(000,223,245,.5) ;
+			display: block;
+			text-align: center;
+		}
+		
+		/*
+		.folder
+		{
 			position: absolute;
 			left: 100px;
 			top: 100px;
@@ -44,6 +66,7 @@
 			height: 394px;
 			background: transparent url('folder.png') no-repeat scroll top center;
 		}
+		*/
 		
 		.canvas
 		{
@@ -75,11 +98,21 @@
 			z-index: 100;
 		}
 		
+		ul
+		{
+			list-style-type: none;
+			padding-left: 10px;
+		}
+		
+		li
+		{
+			margin:5px;
+		}
+		
 		.icon > span
 		{
 			position: absolute;
 			bottom: 0;
-			color: #00e2f6;
 			text-align: center;
 			width: 100%;
 		}
@@ -91,6 +124,22 @@
 	</div>
 	<div id="icon2" class="draw icon hover_border">
 		<span>Draw!</span>
+	</div>
+	<div id="folder" class="folder hover_border">
+		<span id="folder_title" class="folder_title">Project 3</span>
+		<ul id="folder_contents">
+			<li>statemachinetest-1.html</li>
+			<li>Project3Writeup.pdf</li>
+			<li>background.png</li>
+			<li>desktop.html</li>
+			<li>desktop.js</li>
+			<li>doodle-library.js</li>
+			<li>folder.png</li>
+			<li>jquery-1.6.4.min.js</li>
+			<li>slides07-finite_state_controllers.pptx</li>
+			<li>statemachine-starter.js</li>
+			<li>statemachine.js</li>
+		</ul>
 	</div>
 </body>
 </html>
