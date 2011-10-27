@@ -145,7 +145,7 @@ StateMachine.prototype.addStateMachineEventListener = function(transitionInput, 
 			// point the eventlistener for the input to the statemachine updateState function for interception.
 			this.element.addEventListener(this.standardEventLookup[transitionInput], function(e){ this.stateMachine.updateState(e); }, true);
 		} else {
-			// parse out the Ms from the timer input
+			// parse out the Ms from the timer input using regular expressions
 			var matchData = transitionInput.match(/timerTick(\d+)Ms/);
 			var ms = matchData[1];
 		
