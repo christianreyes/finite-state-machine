@@ -1,7 +1,7 @@
 // Sample test file for the state machine class
-// Implements a simple draggable div which changes color when pressed.
+// Implements a set of street lights changing
 
-// Record the location where the div was clicked.
+// change the color when the timer ticks
 function changeColor(e, attachedElement) {
 	var north = document.getElementById("north");  
 	var south = document.getElementById("south");  
@@ -31,7 +31,7 @@ window.onload = function() {
 			name: "north_south_green",
 			transitions: [
 				{
-					input: "timerTick1500Ms", 
+					input: "timerTick1000Ms", 
 					action: changeColor,
 					endState: "east_west_green"
 				}]
@@ -40,7 +40,7 @@ window.onload = function() {
 			name: "east_west_green",
 			transitions: [
 				{
-					input: "timerTick1500Ms", 
+					input: "timerTick1000Ms", 
 					action: changeColor,
 					endState: "north_south_green"
 				}]
@@ -48,5 +48,6 @@ window.onload = function() {
 		]
 	};
 
+	// create the state machine
 	var stateMachineRed = new StateMachine(sampleDescription, container);
 };

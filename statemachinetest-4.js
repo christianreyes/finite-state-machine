@@ -1,18 +1,22 @@
 // Sample test file for the state machine class
-// Implements a simple draggable div which changes color when pressed.
+// Implements a CPU activity monitor using a probabalistic state machine
 
+// simulate low usage
 function poll_activity_low(e, attachedElement){
 	poll_activity(e, attachedElement, "low");
 }
 
+// simulate medium usage
 function poll_activity_medium(e, attachedElement){
 	poll_activity(e, attachedElement, "medium")
 }
 
+// simulate high usage
 function poll_activity_high(e, attachedElement){
 	poll_activity(e, attachedElement, "high")
 }
 
+// set random usage within bounds set by level. Update graph
 function poll_activity(e, attachedElement, level){
 	log("poll activity: " + level);
 	
@@ -29,10 +33,12 @@ function poll_activity(e, attachedElement, level){
 			break;
 	}
 	
+	// update graph
 	$("#graph").css("height", Math.floor(activity_level * 155) + "px"); 
 	$("#percent").text(Math.floor(activity_level * 100) + "%");
 }
 
+// simple logging function
 function log(message){
 	var logging = true;
 	if(logging){
@@ -44,6 +50,7 @@ function log(message){
 window.onload = function() {
 	var activity = document.getElementById("activity");
 	
+	// probabalistic finite state machine definition
 	var activity_definition = {
 		states: [
 		{
@@ -98,5 +105,6 @@ window.onload = function() {
 		]
 	};
    
+	// create the StateMachine
 	new StateMachine(activity_definition, activity);
 };

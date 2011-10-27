@@ -60,6 +60,14 @@ For instance, if the user clicks the mouse, 50% of the time action A will be exe
 ===============================================================
 					Test File Descriptions
 ===============================================================
+
+desktop.html
+
+Integration of multiple state machines at the same time. Modeling different 
+interactions. 
+
+Most of the statemachinetest files were made to test out an interaction method without
+risking having interacting bugs. They are stand-alone instances of the interactions.
  
 statemachinetest-1.html
 
@@ -71,3 +79,16 @@ statemachinetest-2.html
 Implementation of simple rubber-band line drawing with finite state machine.
 Used slightly modified doodle-library from last project. Click at one point
 in the window, move the mouse, and then click another point to finish line.
+
+statemachinetest-3.html
+
+Interaction of double clicking a folder / icon's label to rename. New name (limited to 14 characters) is finalized when user clicks outside the icon or presses enter. StateMachine is "attached" to multiple elements by being attached to a div serving as a container. Events bubble up from inside the container to the StateMachine attached.
+
+statemachinetest-4.html
+
+CPU Activity monitor simulated by a probabilistic finite state machine. Governed by 
+a timer ticking in the background.
+
+statemachinetest-5.html
+
+First attempt at using a timer. Models two steetlights. Operates on container.
