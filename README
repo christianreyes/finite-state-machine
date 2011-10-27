@@ -7,3 +7,67 @@ Created : 		15 Oct 2011
 Modified : 		26 Oct 2011
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+statemachine.js is an implementation of a finite state machine.
+
+A StateMachine is attached to a DOM element with two pieces of information:
+	1. The description of the state machine
+	2. The element which the StateMachine will be attached to.
+	
+The description of the state machine is expressed in JSON. Here is an example of the description for a StateMachine which will model a drag-and-drop interaction.
+
+var drag_and_drop = {
+	states: [
+	{
+		name: "start",
+		transitions: [
+			{
+				input: "mouseDown", 
+				action: record_down_location,
+				endState: "down"
+			}]
+	},
+	{
+		name: "down",
+		transitions: [
+			{
+				input: "mouseUp",
+				action: do_drop,
+				endState: "start"
+			},
+			{
+				input: "mouseMove",
+				action: move_icon,
+				endState: "down"
+			},
+			{
+				input: "mouseOut",
+				action: move_out,
+				endState: "start"
+			}
+		]
+	}
+	]
+};
+
+The StateMachine is created by simply calling:
+
+var sm = new StateMachine(drag_and_drop, myElement);
+
+The StateMachine can also supports probabilistic transitions.
+
+For instance, if the user clicks the mouse, 50% of the time action A will be executed and the other 50% of the time action B will be executed.
+
+===============================================================
+					Test File Descriptions
+===============================================================
+ 
+statemachinetest-1.html
+
+Two boxes are able to be dragged on the screen. There are two state
+machines on the same page. They work without issue.
+
+statemachinetest-2.html
+
+Implementation of simple rubber-band line drawing with finite state machine.
+Used slightly modified doodle-library from last project. Click at one point
+in the window, move the mouse, and then click another point to finish line.
