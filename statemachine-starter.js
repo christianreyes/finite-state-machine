@@ -1,8 +1,4 @@
-// Starter code for Project 3 of SSUI Web Lab
-// author: Julia Schwarz
-
-// Your task is to fill in the rest of this file with your state machine, and then save
-// the file to statemachine.js.
+// first version of state machine
 
 var _current_state = "";
 
